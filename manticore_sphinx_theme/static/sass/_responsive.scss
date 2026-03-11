@@ -1,0 +1,47 @@
+// _responsive.scss — Breakpoints, mobile, print
+@use "variables" as *;
+
+@media (max-width: $bp-tablet) {
+  .bst-sidebar {
+    width: $sidebar-width; transform: translateX(-100%); box-shadow: none;
+    &.is-open { transform: translateX(0); box-shadow: var(--bst-shadow-lg); }
+  }
+  .bst-main { margin-left: 0; }
+  .bst-mobile-bar { display: flex; }
+  .bst-article__content { padding: $gutter-sm 4%; padding-bottom: 3rem; }
+  .bst-breadcrumbs { padding-left: $gutter-sm; padding-right: $gutter-sm; }
+  .bst-pagination { padding-left: $gutter-sm; padding-right: $gutter-sm; gap: 0.5em; }
+  .bst-footer { padding-left: $gutter-sm; padding-right: $gutter-sm; }
+  .bst-footer__inner { flex-direction: column; text-align: center; }
+}
+
+@media (max-width: $bp-mobile) {
+  body.bst-body { font-size: 0.9375rem; }
+  h1 { font-size: 1.6rem; } h2 { font-size: 1.35rem; } h3 { font-size: 1.15rem; }
+  .bst-article__content { padding: 1rem; padding-bottom: 2.5rem; }
+  pre { font-size: 0.75rem; padding: 0.75em 1em; border-radius: $radius; }
+  table { font-size: 0.8rem; display: block; overflow-x: auto; }
+  aside.sidebar, div.sidebar, .sidebar { float: none !important; width: 100%; max-width: 100%; min-width: 0; margin: 0 0 1.25em !important; img { max-width: 60% !important; } }
+  dl.field-list { grid-template-columns: 1fr; dt::after { content: ""; } }
+  .bst-pagination__label { display: none; }
+  .bst-pagination__title { font-size: $size-xsmall; }
+}
+
+@media (min-width: $bp-wide) {
+  .bst-sidebar { width: $sidebar-width-wide; }
+  .bst-main { margin-left: $sidebar-width-wide; }
+}
+
+@media (min-width: 1920px) {
+  .bst-article__content { max-width: 80%; }
+}
+
+@media print {
+  .bst-sidebar, .bst-mobile-bar, .bst-overlay, .bst-page-toc, .bst-toc-toggle, .bst-theme-toggle, .bst-header, .bst-pagination, .bst-sidebar__search, a.headerlink { display: none !important; }
+  .bst-main { margin-left: 0 !important; }
+  .bst-article__content { max-width: 100%; padding: 0; }
+  body.bst-body { font-size: 11pt; color: #000; }
+  a { color: #000; text-decoration: underline; }
+  pre { border: 1px solid #ccc; page-break-inside: avoid; }
+  h1, h2, h3, h4 { page-break-after: avoid; }
+}

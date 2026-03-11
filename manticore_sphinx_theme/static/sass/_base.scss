@@ -1,0 +1,254 @@
+// ─────────────────────────────────────────────────────────────
+//  _base.scss — Typography, lists, tables, blockquotes
+//  ALL colours reference var(--bst-xxx) for dark mode support.
+// ─────────────────────────────────────────────────────────────
+@use "variables" as *;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body.bst-body {
+  font-family: $family-sans;
+  font-size: $size-base;
+  font-weight: $weight-normal;
+  line-height: $line-height;
+  color: var(--bst-text);
+  background: var(--bst-bg);
+  overflow-x: clip;              // clip (not hidden) preserves position: sticky
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $family-heading;
+  font-weight: $weight-medium;
+  line-height: $line-height-tight;
+  color: var(--bst-primary);
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+
+  &:first-child { margin-top: 0; }
+
+  a.headerlink {
+    font-size: 0.7em;
+    color: var(--bst-border);
+    text-decoration: none;
+    padding-left: 0.3em;
+    opacity: 0;
+    transition: opacity $transition-fast, color $transition-fast;
+  }
+
+  &:hover a.headerlink { opacity: 1; color: var(--bst-accent); }
+}
+
+h1 { font-size: $size-h1; margin-top: 0; letter-spacing: -0.01em; }
+h2 { font-size: $size-h2; padding-top: 0.4em; border-top: 1px solid var(--bst-border-light); }
+h3 { font-size: $size-h3; }
+h4 { font-size: $size-h4; }
+
+p { margin-bottom: 1em; }
+
+a {
+  color: var(--bst-link);
+  text-decoration: none;
+  transition: color $transition-fast;
+  &:hover { color: var(--bst-link-hover); text-decoration: underline; }
+  &:visited { color: var(--bst-text-light); }
+  &:visited:hover { color: var(--bst-link-hover); }
+}
+
+strong, b { font-weight: $weight-semi; }
+em, i { font-style: italic; }
+hr { border: none; border-top: 1px solid var(--bst-border); margin: 2em 0; }
+
+// Lists — scoped to article content only (NOT TOC, sidebar, etc.)
+ul {
+  margin-bottom: 1em;
+  padding-left: 2em;
+  border: none !important;
+  border-left: none !important;
+  background: none !important;
+}
+
+ol {
+  margin-bottom: 1em;
+  padding-left: 2em;
+  border: none !important;
+  border-left: none !important;
+  background: none !important;
+}
+
+li { margin-bottom: 0.3em; }
+ul ul, ol ol, ul ol, ol ul { margin-top: 0.3em; margin-bottom: 0.3em; }
+ul, ol, li { border-left: none !important; }
+
+// Custom square bullets — ONLY inside article content
+.bst-article__content {
+  > section ul, > .section ul, > ul {
+    list-style: none !important;
+
+    > li {
+      position: relative;
+      padding-left: 0.3em;
+
+      &::before {
+        content: "■";
+        position: absolute;
+        left: -1.3em;
+        top: 0.15em;
+        color: var(--bst-accent);          // orange
+        font-size: 1.1em;                  // slightly larger than text
+        line-height: 1;
+      }
+    }
+
+    // Level 2
+    ul > li::before {
+      content: "▪";
+      color: var(--bst-primary);
+      font-size: 1em;
+    }
+
+    // Level 3
+    ul ul > li::before {
+      content: "▫";
+      color: var(--bst-text-light);
+      font-size: 0.95em;
+    }
+  }
+}
+
+dl {
+  margin-bottom: 1em;
+  dt { font-weight: $weight-semi; margin-top: 1em; }
+  dd { margin-left: 1.5em; margin-bottom: 0.5em; }
+}
+
+table { width: 100%; border-collapse: collapse; margin-bottom: 1.5em; font-size: $size-small; clear: right; }
+
+th, td { padding: 0.6em 0.9em; text-align: left; border-bottom: 1px solid var(--bst-border); }
+
+th { font-weight: $weight-semi; background: var(--bst-bg-surface); color: var(--bst-text-strong); border-bottom-width: 2px; }
+
+tbody tr:hover { background: rgba(128,128,128,0.04); }
+
+img { max-width: 100%; height: auto; }
+
+figure {
+  width: 100%;
+  a.image-reference { display: block; }
+  margin: 1.5em 0;
+  text-align: center;
+  figcaption, .caption-text { font-size: $size-small; color: var(--bst-text-light); margin-top: 0.5em; }
+}
+
+blockquote {
+  border-left: 3px solid var(--bst-accent);
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  color: var(--bst-text-light);
+  background: rgba(128,128,128,0.03);
+  border-radius: 0 $radius $radius 0;
+  p:last-child { margin-bottom: 0; }
+}
+
+::selection { background: rgba(0,119,182,0.18); color: var(--bst-text-strong); }
+
+
+// ── Sphinx 8+ uses <section> instead of <div class="section"> ───
+section { display: block; }
+
+// ── Line blocks ─────────────────────────────────────────────
+.line-block {
+  margin-bottom: 1em;
+  .line { display: block; margin-bottom: 0; }
+  .line-block { margin-left: 1.5em; margin-bottom: 0; }
+}
+
+// ── Epigraph / Pull-quote / Highlights ──────────────────────
+.epigraph, .pull-quote {
+  border-left: 3px solid var(--bst-accent);
+  padding: 0.75em 1.25em;
+  margin: 1.5em 2em;
+  font-style: italic;
+  color: var(--bst-text-light);
+  background: rgba(128,128,128,0.03);
+  border-radius: 0 $radius $radius 0;
+  p:last-child { margin-bottom: 0; }
+
+  .attribution {
+    font-style: normal;
+    text-align: right;
+    color: var(--bst-text-light);
+    font-size: $size-small;
+    margin-top: 0.5em;
+    &::before { content: "— "; }
+  }
+}
+
+.pull-quote {
+  font-size: 1.1em;
+  margin: 2em 3em;
+}
+
+.highlights {
+  margin: 1em 0;
+  padding: 0.75em 1.25em;
+  background: var(--bst-bg-raised);
+  border-radius: $radius-lg;
+}
+
+p.centered {
+  text-align: center;
+  font-weight: $weight-semi;
+}
+
+// ── HTML5 details / summary ─────────────────────────────────
+details {
+  margin-bottom: 1em;
+  border: 1px solid var(--bst-border);
+  border-radius: $radius-lg;
+  padding: 0.5em 1em;
+  background: var(--bst-bg-raised);
+
+  summary {
+    cursor: pointer;
+    font-weight: $weight-semi;
+    color: var(--bst-text-strong);
+    padding: 0.3em 0;
+    &:hover { color: var(--bst-accent); }
+  }
+
+  &[open] summary { margin-bottom: 0.5em; border-bottom: 1px solid var(--bst-border-light); padding-bottom: 0.5em; }
+}
+
+// ── Abbreviation ────────────────────────────────────────────
+abbr, .abbreviation {
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  cursor: help;
+}
+
+// ── Superscript / Subscript ─────────────────────────────────
+sup, sub { font-size: 0.75em; }
+
+// ── Image alignment helpers (Sphinx-generated) ──────────────
+.align-left { float: left; margin: 0.25em 1.5em 1em 0; }
+.align-right { float: right; margin: 0.25em 0 1em 1.5em; }
+.align-center { display: block; margin-left: auto; margin-right: auto; text-align: center; }
+
+// ── Clearfix — applied only where explicitly needed ─────────
+.clearfix::after { content: ""; display: table; clear: both; }
+
+// ── Float-aware block elements ──────────────────────────────
+// Code blocks and tables must clear sidebar floats (they're too
+// wide to wrap).  Sections should NOT clear — that would break
+// the wrapping for content after the sidebar.
+div.highlight, div.literal-block-wrapper, pre.literal-block {
+  clear: right;
+}

@@ -1,0 +1,106 @@
+// ─────────────────────────────────────────────────────────────
+//  _variables.scss — Design tokens
+//
+//  ALL colours that change between light/dark are CSS custom
+//  properties defined in :root.  Dark mode overrides them in
+//  _dark.scss.  Non-colour tokens stay as SASS variables.
+//
+//  Manticore branding:
+//    Primary (dark navy):  #030146  — headings, sidebar identity
+//    Accent  (orange):     #ff420e  — links, active states, CTAs
+// ─────────────────────────────────────────────────────────────
+
+// ── CSS colour tokens (light defaults) ──────────────────────
+
+:root {
+  // Branding (settable via html_theme_options)
+  --bst-primary:       #030146;
+  --bst-accent:        #ff420e;
+  --bst-sidebar-bg:    #f5f6fa;
+  --bst-sidebar-text:  #2d2d48;
+
+  // Surfaces
+  --bst-bg:            #ffffff;
+  --bst-bg-raised:     #f5f6fa;
+  --bst-bg-surface:    #eef0f5;
+  --bst-bg-code:       #f8f8fc;
+
+  // Text
+  --bst-text:          #2d2d48;
+  --bst-text-light:    #5f6580;
+  --bst-text-strong:   #0e0e2c;
+
+  // Borders
+  --bst-border:        #d8dbe5;
+  --bst-border-light:  #eef0f5;
+
+  // Code
+  --bst-code-inline-bg: #eef0f5;
+  --bst-code-inline-fg: #d63200;
+
+  // Links
+  --bst-link:          var(--bst-accent);
+  --bst-link-hover:    #cc3000;
+
+  // Semantic (admonitions)
+  --bst-success:       #38a169;
+  --bst-warning:       #d69e2e;
+  --bst-danger:        #e53e3e;
+  --bst-info:          #3182ce;
+
+  // Shadows
+  --bst-shadow-sm:     0 1px 2px rgba(0,0,0,0.06);
+  --bst-shadow-md:     0 2px 8px rgba(0,0,0,0.08);
+  --bst-shadow-lg:     0 4px 16px rgba(0,0,0,0.10);
+
+  // Content width
+  --bst-content-max:   52rem;
+}
+
+
+// ── SASS-only tokens (unchanged in dark mode) ───────────────
+
+// Typography — Roboto family (all sizes +2pt from original)
+$family-heading:     "Roboto", "Segoe UI", system-ui, -apple-system, sans-serif !default;
+$family-sans:        "Roboto Slab", "Georgia", "Cambria", "Times New Roman", serif !default;
+$family-mono:        "Roboto Mono", "Fira Code", "Cascadia Code", "SFMono-Regular", Consolas, monospace !default;
+
+$size-base:          1.125rem   !default;  // 18px (was 16px)
+$size-small:         1rem       !default;  // 16px (was 14px)
+$size-xsmall:        0.9375rem  !default;  // 15px (was 13px)
+$size-h1:            2.25rem    !default;  // 36px (was 32px)
+$size-h2:            1.875rem   !default;  // 30px (was 26px)
+$size-h3:            1.5rem     !default;  // 24px (was 21px)
+$size-h4:            1.25rem    !default;  // 20px (was 18px)
+
+$weight-light:       300  !default;
+$weight-normal:      400  !default;
+$weight-medium:      500  !default;
+$weight-semi:        600  !default;
+$weight-bold:        700  !default;
+
+$line-height:        1.7   !default;
+$line-height-tight:  1.35  !default;
+
+// Layout
+$sidebar-width:      18rem  !default;
+$sidebar-width-wide: 20rem  !default;
+$page-toc-width:     14rem  !default;
+$header-height:      3rem     !default;
+$mobile-bar-height:  3.25rem  !default;
+$gutter:             2rem     !default;
+$gutter-sm:          1.25rem  !default;
+
+// Borders & Radii
+$radius:             4px  !default;
+$radius-lg:          6px  !default;
+
+// Transitions
+$transition-fast:    0.15s ease  !default;
+$transition-base:    0.25s ease  !default;
+
+// Breakpoints
+$bp-mobile:          768px   !default;
+$bp-tablet:          1024px  !default;
+$bp-desktop:         1280px  !default;
+$bp-wide:            1440px  !default;

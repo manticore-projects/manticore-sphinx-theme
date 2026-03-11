@@ -1,0 +1,37 @@
+// _footer.scss — Pagination and footer
+@use "variables" as *;
+
+.bst-pagination {
+  display: flex; justify-content: space-between; align-items: stretch;
+  gap: 0.75em; padding: 1.25em $gutter;
+  border-top: 1px solid var(--bst-border); margin-top: auto;
+}
+
+.bst-pagination__prev, .bst-pagination__next {
+  display: flex; align-items: center; gap: 0.6em;
+  text-decoration: none; padding: 0.6em 0.9em;
+  border: 1px solid var(--bst-border); border-radius: $radius-lg;
+  min-width: 0; max-width: 50%;
+  transition: border-color $transition-fast, box-shadow $transition-fast, background $transition-fast;
+  &:hover { border-color: var(--bst-accent); box-shadow: var(--bst-shadow-sm); text-decoration: none; }
+  svg { color: var(--bst-text-light); flex-shrink: 0; }
+}
+
+.bst-pagination__next { margin-left: auto; text-align: right; .bst-pagination__text { align-items: flex-end; } }
+
+.bst-pagination__text { display: flex; flex-direction: column; min-width: 0; }
+
+.bst-pagination__label { font-family: $family-heading; font-size: $size-xsmall; font-weight: $weight-medium; text-transform: uppercase; letter-spacing: 0.04em; color: var(--bst-text-light); line-height: 1.2; }
+
+.bst-pagination__title { font-size: $size-small; font-weight: $weight-semi; color: var(--bst-primary); margin-top: 0.1em; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.bst-footer {
+  padding: 1.5em $gutter; border-top: 1px solid var(--bst-border);
+  background: var(--bst-bg-raised); font-family: $family-heading; font-size: $size-xsmall; color: var(--bst-text-light);
+}
+
+.bst-footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0.5em; }
+
+.bst-footer__text, .bst-footer__powered, .bst-footer__copy { margin: 0; }
+
+.bst-footer__powered a, .bst-footer__copy a { color: var(--bst-accent); }

@@ -1,0 +1,16 @@
+// ─────────────────────────────────────────────────────────────
+//  _normalize.scss — Minimal reset
+// ─────────────────────────────────────────────────────────────
+
+html {
+  box-sizing: border-box;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  min-height: 100%;
+  overflow-y: scroll;
+  text-rendering: optimizeLegibility;
+}
+
+article, aside, footer, header, main, nav, section { display: block; }
+img, video { height: auto; max-width: 100%; }

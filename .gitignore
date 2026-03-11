@@ -1,0 +1,9 @@
+_build/
+dist/
+*.egg-info/
+.eggs/
+__pycache__/
+*.pyc
+vendor/
+.sass-cache/
+node_modules/

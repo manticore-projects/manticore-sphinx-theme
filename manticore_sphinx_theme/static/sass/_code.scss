@@ -1,0 +1,72 @@
+// _code.scss — Code blocks and inline code
+@use "variables" as *;
+
+code, tt, kbd { font-family: $family-mono; font-size: 0.875em; }
+
+:not(pre) > code, :not(pre) > tt {
+  background: var(--bst-code-inline-bg); color: var(--bst-code-inline-fg);
+  padding: 0.15em 0.4em; border-radius: 3px; word-break: break-word;
+}
+
+kbd {
+  background: var(--bst-bg-surface); border: 1px solid var(--bst-border);
+  border-bottom-width: 2px; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.8em;
+  color: var(--bst-text);
+}
+
+pre {
+  font-family: $family-mono; font-size: $size-xsmall; line-height: 1.6;
+  background: var(--bst-bg-code); color: var(--bst-text);
+  border: 1px solid var(--bst-border); border-radius: $radius-lg;
+  padding: 1em 1.25em; margin-bottom: 1.5em; overflow-x: auto;
+  &::-webkit-scrollbar { height: 6px; }
+  &::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.15); border-radius: 3px; }
+}
+
+div.highlight, div.literal-block-wrapper {
+  position: relative;
+  margin-bottom: 1.5em;
+  pre { margin-bottom: 0; }
+}
+
+div.code-block-caption {
+  font-size: $size-xsmall; font-weight: $weight-semi; color: var(--bst-text-light);
+  background: var(--bst-bg-surface); border: 1px solid var(--bst-border);
+  border-bottom: none; border-radius: $radius-lg $radius-lg 0 0; padding: 0.4em 1em;
+  + div.highlight pre { border-top-left-radius: 0; border-top-right-radius: 0; }
+}
+
+.linenodiv pre { background: transparent; border: none; padding-right: 0.75em; color: var(--bst-text-light); user-select: none; }
+
+table.highlighttable {
+  margin-bottom: 1.5em; width: 100%;
+  td { padding: 0; border: none; }
+  td.linenos { width: 3em; vertical-align: top; background: var(--bst-bg-surface); border-right: 1px solid var(--bst-border); border-radius: $radius-lg 0 0 $radius-lg; }
+  td.code pre { border-left: none; border-radius: 0 $radius-lg $radius-lg 0; }
+}
+
+// Pygments (Tango-based, light mode)
+.highlight {
+  .hll { background: #ffffcc; }
+  .c, .cm, .c1, .cs, .cp { color: #8f5902; font-style: italic; }
+  .k, .kn, .kp, .kr { color: #204a87; font-weight: 600; }
+  .kc, .kd, .kt { color: #204a87; }
+  .o, .ow { color: #ce5c00; }
+  .n { color: var(--bst-text); }
+  .na { color: #c4a000; }
+  .nb { color: #204a87; }
+  .nc, .no, .nf, .nn { color: #000000; }
+  .nd { color: #5c35cc; }
+  .ne { color: #cc0000; font-weight: 600; }
+  .nt { color: #204a87; font-weight: 600; }
+  .nv, .bp { color: #000000; }
+  .s, .sb, .sc, .sd, .sh, .s2, .s1, .se, .si, .sx, .sr, .ss { color: #4e9a06; }
+  .m, .mf, .mh, .mi, .mo { color: #0000cf; }
+  .p { color: var(--bst-text); }
+  .w { color: #f8f8f8; }
+  .err { color: #a40000; border-bottom: 1px dotted #ef2929; }
+  .gh { color: #000080; font-weight: 600; }
+  .gu { color: #800080; font-weight: 600; }
+  .gd { color: #a40000; }
+  .gi { color: #00a000; }
+}

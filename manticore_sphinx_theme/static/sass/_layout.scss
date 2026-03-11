@@ -1,0 +1,179 @@
+// ─────────────────────────────────────────────────────────────
+//  _layout.scss — Wrapper, main, breadcrumbs, header, toggle
+// ─────────────────────────────────────────────────────────────
+@use "variables" as *;
+
+.bst-wrapper { display: flex; min-height: 100vh; }
+
+.bst-main {
+  flex: 1 1 0;
+  min-width: 0;
+  margin-left: $sidebar-width;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left $transition-base;
+}
+
+// ── Single sticky header: breadcrumbs left, controls right ──
+.bst-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 0 $gutter;
+  height: $header-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+  border-bottom: 1px solid var(--bst-border-light);
+  background: var(--bst-bg);
+}
+
+.bst-header__left {
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.bst-header__right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+}
+
+// ── Breadcrumbs (inside header__left) ───────────────────────
+.bst-breadcrumbs {
+  padding: 0;
+  border: none;
+  font-family: $family-heading;
+  font-size: $size-xsmall;
+  color: var(--bst-text-light);
+  background: none;
+}
+
+.bst-breadcrumbs__list {
+  list-style: none !important;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    position: static;
+    padding-left: 0;
+    white-space: nowrap;
+    &::before { content: none !important; display: none !important; }
+
+    &:not(:last-child)::after { content: "/"; margin: 0 0.5em; color: var(--bst-border); }
+
+    a { color: var(--bst-text-light); text-decoration: none; &:hover { color: var(--bst-link); } }
+
+    &.is-active { color: var(--bst-text); font-weight: $weight-semi; }
+  }
+}
+
+.bst-header__repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-size: $size-small;
+  font-weight: $weight-semi;
+  color: var(--bst-text-light);
+  text-decoration: none;
+  padding: 0.3em 0.7em;
+  border-radius: $radius;
+  transition: background $transition-fast, color $transition-fast;
+  &:hover { background: var(--bst-bg-surface); color: var(--bst-text); text-decoration: none; }
+}
+
+// ── Article ─────────────────────────────────────────────────
+.bst-article { flex: 1 1 auto; padding: 0; }
+
+.bst-article__content {
+  display: flow-root;
+  min-width: 0;
+  max-width: 100%;
+  padding: $gutter 8%;             // 8% left/right margins
+  padding-bottom: 4rem;
+}
+
+// ── Mobile bar ──────────────────────────────────────────────
+.bst-mobile-bar {
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: $mobile-bar-height;
+  background: var(--bst-bg);
+  border-bottom: 1px solid var(--bst-border);
+  padding: 0 $gutter-sm;
+}
+
+.bst-mobile-bar__inner { display: flex; align-items: center; height: 100%; gap: 0.75em; }
+
+.bst-mobile-bar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: $family-heading;
+  font-weight: $weight-medium;
+  color: var(--bst-text-strong);
+  text-decoration: none;
+}
+
+.bst-mobile-bar__logo { height: 2rem; width: auto; }
+
+// ── Hamburger ───────────────────────────────────────────────
+.bst-hamburger {
+  width: 2rem; height: 2rem; border: none; background: none;
+  cursor: pointer; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; gap: 4px; padding: 0;
+
+  span {
+    display: block; width: 18px; height: 2px; background: var(--bst-text);
+    border-radius: 1px; transition: transform $transition-fast, opacity $transition-fast;
+  }
+
+  &.is-active {
+    span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  }
+}
+
+// ── Overlay ─────────────────────────────────────────────────
+.bst-overlay {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: rgba(0,0,0,0.35); backdrop-filter: blur(2px);
+  opacity: 0; transition: opacity $transition-base;
+  &.is-visible { display: block; opacity: 1; }
+}
+
+// ── Dark mode toggle — 3-state ──────────────────────────────
+.bst-theme-toggle {
+  width: 2.25rem; height: 2.25rem;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--bst-border); border-radius: $radius;
+  background: var(--bst-bg); color: var(--bst-text-light);
+  cursor: pointer;
+  transition: color $transition-fast, border-color $transition-fast, background $transition-fast;
+  &:hover { color: var(--bst-accent); border-color: var(--bst-accent); }
+
+  .bst-theme-icon { display: none; }
+  .bst-theme-icon--system { display: block; }
+
+  &[data-mode="dark"] {
+    .bst-theme-icon--system { display: none; }
+    .bst-theme-icon--dark   { display: block; }
+  }
+  &[data-mode="light"] {
+    .bst-theme-icon--system { display: none; }
+    .bst-theme-icon--light  { display: block; }
+  }
+}

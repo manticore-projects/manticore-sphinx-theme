@@ -1,0 +1,23 @@
+// ─────────────────────────────────────────────────────────────
+//  theme.scss — Bulma Sphinx Theme entry point
+//
+//  Dark mode: ALL colours are CSS custom properties defined in
+//  _variables.scss (:root) and overridden in _dark.scss.
+//  No SASS mixin involved — pure CSS, guaranteed to work.
+// ─────────────────────────────────────────────────────────────
+
+// BUILD MARKER: v2024-fix4 — verify this appears in compiled theme.css
+
+@use "normalize";
+@use "variables";
+@use "base";
+@use "layout";
+@use "sidebar";
+@use "toc";
+@use "code";
+@use "admonitions";
+@use "content";
+@use "footer";
+@use "responsive";
+@use "landing";
+@use "dark";

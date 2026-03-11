@@ -1,0 +1,138 @@
+// ─────────────────────────────────────────────────────────────
+//  _dark.scss — Dark mode via CSS custom property overrides
+//
+//  NO mixin, NO component-level rules.  Just override :root vars.
+//  This approach is bulletproof across all SASS compilers.
+//
+//  Activation:
+//    1. OS preference:    @media (prefers-color-scheme: dark)
+//    2. Manual toggle:    html[data-theme="dark"]
+//    3. Opt-out:          html[data-theme="light"] stays light
+// ─────────────────────────────────────────────────────────────
+
+// ── Dark palette values ─────────────────────────────────────
+// (Plain CSS — no SASS functions needed)
+
+// The actual property overrides, written as a plain block.
+// Used identically inside @media and [data-theme].
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --bst-primary:       #7b7bbd;
+    --bst-accent:        #ff6b3d;
+    --bst-sidebar-bg:    #141428;
+    --bst-sidebar-text:  #b0b4c8;
+
+    --bst-bg:            #0e0e1e;
+    --bst-bg-raised:     #18182e;
+    --bst-bg-surface:    #222240;
+    --bst-bg-code:       #151530;
+
+    --bst-text:          #d1d3de;
+    --bst-text-light:    #8e92a8;
+    --bst-text-strong:   #f0f0f8;
+
+    --bst-border:        #2e2e50;
+    --bst-border-light:  #222240;
+
+    --bst-code-inline-bg: #222240;
+    --bst-code-inline-fg: #ff8a6a;
+
+    --bst-link:          #ff6b3d;
+    --bst-link-hover:    #ff9060;
+
+    --bst-success:       #4ade80;
+    --bst-warning:       #fbbf24;
+    --bst-danger:        #f87171;
+    --bst-info:          #60a5fa;
+
+    --bst-shadow-sm:     0 1px 2px rgba(0,0,0,0.3);
+    --bst-shadow-md:     0 2px 8px rgba(0,0,0,0.4);
+    --bst-shadow-lg:     0 4px 16px rgba(0,0,0,0.5);
+
+    color-scheme: dark;
+  }
+}
+
+html[data-theme="dark"] {
+  --bst-primary:       #7b7bbd;
+  --bst-accent:        #ff6b3d;
+  --bst-sidebar-bg:    #141428;
+  --bst-sidebar-text:  #b0b4c8;
+
+  --bst-bg:            #0e0e1e;
+  --bst-bg-raised:     #18182e;
+  --bst-bg-surface:    #222240;
+  --bst-bg-code:       #151530;
+
+  --bst-text:          #d1d3de;
+  --bst-text-light:    #8e92a8;
+  --bst-text-strong:   #f0f0f8;
+
+  --bst-border:        #2e2e50;
+  --bst-border-light:  #222240;
+
+  --bst-code-inline-bg: #222240;
+  --bst-code-inline-fg: #ff8a6a;
+
+  --bst-link:          #ff6b3d;
+  --bst-link-hover:    #ff9060;
+
+  --bst-success:       #4ade80;
+  --bst-warning:       #fbbf24;
+  --bst-danger:        #f87171;
+  --bst-info:          #60a5fa;
+
+  --bst-shadow-sm:     0 1px 2px rgba(0,0,0,0.3);
+  --bst-shadow-md:     0 2px 8px rgba(0,0,0,0.4);
+  --bst-shadow-lg:     0 4px 16px rgba(0,0,0,0.5);
+
+  color-scheme: dark;
+}
+
+
+// ── Pygments dark overrides ─────────────────────────────────
+//    Syntax highlighting tokens need explicit selectors because
+//    they use hard-coded colors, not CSS vars.
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) .highlight {
+    .hll { background: rgba(255,255,255,0.06); }
+    .c, .cm, .c1, .cs, .cp { color: #6b7280; }
+    .k, .kn, .kp, .kr, .kc, .kd, .kt { color: #93bbfb; }
+    .o, .ow { color: #f0a96e; }
+    .na { color: #e5c07b; }
+    .nb { color: #93bbfb; }
+    .nc, .no, .nf, .nn { color: #e5c890; }
+    .nd { color: #c4a5e7; }
+    .ne { color: #f87171; }
+    .nt { color: #93bbfb; }
+    .s, .sb, .sc, .sd, .sh, .s2, .s1, .se, .si, .sx, .sr, .ss { color: #a6e3a1; }
+    .m, .mf, .mh, .mi, .mo { color: #fab387; }
+    .err { color: #f87171; border-bottom-color: #f87171; }
+    .gd { color: #f87171; }
+    .gi { color: #a6e3a1; }
+    .gh { color: #93bbfb; }
+    .gu { color: #c4a5e7; }
+  }
+}
+
+html[data-theme="dark"] .highlight {
+  .hll { background: rgba(255,255,255,0.06); }
+  .c, .cm, .c1, .cs, .cp { color: #6b7280; }
+  .k, .kn, .kp, .kr, .kc, .kd, .kt { color: #93bbfb; }
+  .o, .ow { color: #f0a96e; }
+  .na { color: #e5c07b; }
+  .nb { color: #93bbfb; }
+  .nc, .no, .nf, .nn { color: #e5c890; }
+  .nd { color: #c4a5e7; }
+  .ne { color: #f87171; }
+  .nt { color: #93bbfb; }
+  .s, .sb, .sc, .sd, .sh, .s2, .s1, .se, .si, .sx, .sr, .ss { color: #a6e3a1; }
+  .m, .mf, .mh, .mi, .mo { color: #fab387; }
+  .err { color: #f87171; border-bottom-color: #f87171; }
+  .gd { color: #f87171; }
+  .gi { color: #a6e3a1; }
+  .gh { color: #93bbfb; }
+  .gu { color: #c4a5e7; }
+}

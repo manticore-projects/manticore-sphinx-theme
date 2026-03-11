@@ -1,0 +1,302 @@
+// _content.scss — Sphinx domains, field lists, search, glossary
+@use "variables" as *;
+
+dl.py, dl.cpp, dl.c, dl.js, dl.describe, dl.class, dl.function, dl.method, dl.attribute, dl.exception, dl.data, dl.type {
+  margin-bottom: 1.5em;
+
+  dt {
+    background: var(--bst-bg-code); border: 1px solid var(--bst-border);
+    border-radius: $radius; padding: 0.5em 0.75em;
+    font-family: $family-mono; font-size: $size-small;
+    color: var(--bst-text-strong); margin-top: 1.5em;
+    &:first-child { margin-top: 0; }
+    .property { font-style: italic; color: var(--bst-text-light); margin-right: 0.5em; }
+    a.headerlink { float: right; }
+    .descname, .sig-name { font-weight: $weight-bold; color: var(--bst-primary); }
+    .sig-paren { color: var(--bst-text-light); }
+    .sig-param { font-style: italic; }
+  }
+
+  dd {
+    margin-left: 0; padding: 0.75em 0 0.75em 1.5em;
+    border-left: 2px solid var(--bst-border-light);
+    > :first-child { margin-top: 0; }
+  }
+}
+
+dl.field-list {
+  display: grid; grid-template-columns: max-content 1fr;
+  gap: 0.3em 1em; margin-bottom: 1em;
+  dt { font-weight: $weight-semi; margin: 0; padding: 0.2em 0; color: var(--bst-text-strong); white-space: nowrap; &::after { content: ":"; } }
+  dd { margin: 0; padding: 0.2em 0; ul { margin: 0; padding-left: 1.25em; } }
+}
+
+table.field-list {
+  td, th { border: none; padding: 0.3em 0.75em; }
+  th { background: none; font-weight: $weight-semi; text-align: right; white-space: nowrap; }
+}
+
+p.rubric { font-weight: $weight-bold; font-size: $size-h4; color: var(--bst-text-strong); margin-top: 1.5em; margin-bottom: 0.5em; }
+
+dl.footnote, dl.citation {
+  font-size: $size-small; margin-bottom: 1em;
+  border-left: 3px solid var(--bst-border); padding-left: 1em;
+  dt { float: left; font-weight: $weight-bold; margin-right: 0.5em; }
+  dd { margin-left: 2.5em; }
+}
+
+a.footnote-reference, a.citation-reference { font-size: 0.75em; vertical-align: super; color: var(--bst-accent); }
+
+dl.glossary dt { font-weight: $weight-bold; font-size: $size-base; border-bottom: 1px dotted var(--bst-border); padding-bottom: 0.2em; }
+
+.guilabel, .menuselection {
+  font-weight: $weight-semi; font-size: 0.95em;
+  background: var(--bst-code-inline-bg); padding: 0.1em 0.4em;
+  border: 1px solid var(--bst-border); border-radius: 3px;
+}
+
+ul.search {
+  list-style: none !important; padding: 0;
+  li {
+    margin-bottom: 1.5em; padding-bottom: 1.5em; border-bottom: 1px solid var(--bst-border-light);
+    position: static; padding-left: 0; &::before { content: none !important; display: none !important; }
+    a { font-size: $size-h4; font-weight: $weight-semi; }
+    .context { font-size: $size-small; color: var(--bst-text-light); margin-top: 0.3em; }
+  }
+}
+
+.highlighted { background: color-mix(in srgb, var(--bst-warning) 25%, transparent); padding: 0 0.15em; border-radius: 2px; }
+
+div.math { overflow-x: auto; padding: 0.5em 0; }
+span.eqno { float: right; color: var(--bst-text-light); }
+div.container { margin-bottom: 1em; }
+
+table.indextable { width: 100%; td, th { text-align: left; border: none; padding: 0.2em 0.5em; } }
+
+
+// ── Inline roles ────────────────────────────────────────────
+
+.command {
+  font-family: $family-mono;
+  font-size: 0.9em;
+  font-weight: $weight-semi;
+  color: var(--bst-text-strong);
+}
+
+.file {
+  font-family: $family-mono;
+  font-size: 0.9em;
+  font-style: italic;
+  color: var(--bst-text);
+
+  &::before { content: "📄 "; font-style: normal; }
+}
+
+.envvar {
+  font-family: $family-mono;
+  font-size: 0.9em;
+  color: var(--bst-text-strong);
+  background: var(--bst-code-inline-bg);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+
+kbd, .kbd {
+  font-family: $family-mono;
+  font-size: 0.8em;
+  background: var(--bst-bg-surface);
+  border: 1px solid var(--bst-border);
+  border-bottom-width: 2px;
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  color: var(--bst-text);
+  white-space: nowrap;
+}
+
+code.xref {
+  background: transparent;
+  color: var(--bst-link);
+  padding: 0;
+  border: none;
+  font-weight: $weight-normal;
+}
+
+
+// ── Doctest blocks ──────────────────────────────────────────
+
+.doctest {
+  margin-bottom: 1.5em;
+
+  pre {
+    background: var(--bst-bg-code);
+    border: 1px solid var(--bst-border);
+    border-radius: $radius-lg;
+  }
+}
+
+
+// ── Todo directive ──────────────────────────────────────────
+
+.admonition-todo, .todo {
+  border-left-color: var(--bst-info);
+  background: color-mix(in srgb, var(--bst-info) 6%, var(--bst-bg));
+
+  .admonition-title { color: var(--bst-info); }
+}
+
+
+// ── Download links ──────────────────────────────────────────
+
+.download {
+  font-weight: $weight-semi;
+
+  &::before {
+    content: "⬇ ";
+    font-style: normal;
+  }
+}
+
+a.download { color: var(--bst-accent); }
+
+
+// ── Reference links ─────────────────────────────────────────
+
+a.reference {
+  color: var(--bst-link);
+  text-decoration: none;
+  &:hover { color: var(--bst-link-hover); text-decoration: underline; }
+}
+
+a.reference.external {
+  &::after {
+    content: " ↗";
+    font-size: 0.75em;
+    vertical-align: super;
+    color: var(--bst-text-light);
+    text-decoration: none;
+  }
+}
+
+
+// ── Option lists ────────────────────────────────────────────
+
+table.option-list, .option-list {
+  width: 100%;
+  margin-bottom: 1.5em;
+
+  td, th {
+    padding: 0.4em 0.75em;
+    border-bottom: 1px solid var(--bst-border-light);
+    vertical-align: top;
+  }
+
+  td.option-group {
+    font-family: $family-mono;
+    font-size: $size-small;
+    font-weight: $weight-semi;
+    white-space: nowrap;
+    padding-right: 1em;
+    color: var(--bst-text-strong);
+  }
+}
+
+
+// ── Production lists (grammars) ─────────────────────────────
+
+.productionlist {
+  font-family: $family-mono;
+  font-size: $size-small;
+  margin-bottom: 1.5em;
+  background: var(--bst-bg-code);
+  border: 1px solid var(--bst-border);
+  border-radius: $radius-lg;
+  padding: 0.75em 1em;
+  overflow-x: auto;
+
+  .production {
+    display: block;
+    padding: 0.15em 0;
+  }
+
+  .token {
+    color: var(--bst-accent);
+    font-weight: $weight-semi;
+    text-decoration: none;
+  }
+}
+
+
+// ── Table of contents (nav.contents / .. contents::) ────────
+
+nav.contents, .contents, .topic.contents {
+  background: var(--bst-bg-raised);
+  border: 1px solid var(--bst-border);
+  border-radius: $radius-lg;
+  padding: 1em 1.25em;
+  margin-bottom: 1.5em;
+
+  > p:first-child, .topic-title {
+    font-weight: $weight-bold;
+    font-size: $size-small;
+    margin-bottom: 0.5em;
+    color: var(--bst-text-strong);
+  }
+
+  ul {
+    margin-bottom: 0;
+    font-size: $size-small;
+  }
+}
+
+
+// ── Genindex / Modindex tables ──────────────────────────────
+
+table.genindextable {
+  width: 100%;
+
+  td, th {
+    text-align: left;
+    border: none;
+    padding: 0.2em 0.5em;
+  }
+}
+
+
+// ── Search result kind indicators (Sphinx 8+) ───────────────
+
+ul.search {
+  li.kind-index { border-left: 3px solid var(--bst-info); padding-left: 0.75em; }
+  li.kind-object { border-left: 3px solid var(--bst-success); padding-left: 0.75em; }
+  li.kind-title { border-left: 3px solid var(--bst-accent); padding-left: 0.75em; }
+  li.kind-text { border-left: 3px solid var(--bst-border); padding-left: 0.75em; }
+}
+
+
+// ── Glossary term links ─────────────────────────────────────
+
+.term {
+  font-weight: $weight-semi;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 2px;
+  color: var(--bst-link);
+}
+
+
+// ── Compound paragraphs ─────────────────────────────────────
+
+.compound {
+  margin-bottom: 1em;
+}
+
+
+// ── Image reference links (without sidebar context) ─────────
+
+a.image-reference {
+  display: inline-block;
+  text-decoration: none;
+
+  &:hover img {
+    box-shadow: var(--bst-shadow-md);
+  }
+}

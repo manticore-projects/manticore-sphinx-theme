@@ -1,0 +1,391 @@
+{# ───────────────────────────────────────────────────────────────── layout.html — Manticore Sphinx Theme Single sticky
+header: breadcrumbs left, dark-mode + repo right. Landing cards: configured via html_context["landing_page"]["menu"]
+with optional icon, title, description per card. ───────────────────────────────────────────────────────────────── #} {%
+extends "basic/layout.html" %} {% block header %}{% endblock %} {% block relbar1 %}{% endblock %} {% block relbar2 %}{%
+endblock %} {% block footer %}{% endblock %} {% block sidebar1 %}{% endblock %} {% block sidebar2 %}{% endblock %} {%-
+set is_landing = (theme_landing_page and pagename == theme_landing_page) -%} {% block extrahead %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>
+    (function () {
+        var s;
+        try {
+            s = localStorage.getItem("bst-theme");
+        } catch (e) {}
+        if (s === "dark" || s === "light") {
+            document.documentElement.setAttribute("data-theme", s);
+        }
+    })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Slab:wght@300;400;600;700&family=Roboto+Mono:wght@400;500&display=swap"
+/>
+{%- if theme_favicon %}
+<link rel="icon" href="{{ pathto('_static/' + theme_favicon, 1) }}" />
+{%- endif %}
+<style>
+    :root {
+      --bst-primary:      {{ theme_color_primary }};
+      --bst-accent:       {{ theme_color_accent }};
+      --bst-sidebar-bg:   {{ theme_color_sidebar_bg }};
+      --bst-sidebar-text: {{ theme_color_sidebar_text }};
+      --bst-content-max:  {{ theme_content_max_width }};
+    }
+    aside.sidebar, div.sidebar {
+      float: right !important;
+      clear: right;
+      width: 33%;
+      max-width: none;
+      min-width: 10rem;
+      margin: 0.25em 0 1.25em 1.5em !important;
+      overflow: hidden;
+      border-left: 1px solid var(--bst-border) !important;
+    }
+    aside.sidebar img, div.sidebar img {
+      display: block !important;
+      float: none !important;
+      width: 100%;
+      max-width: 100% !important;
+      height: auto !important;
+      margin: 0.3em auto !important;
+    }
+    aside.sidebar a.image-reference, div.sidebar a.image-reference {
+      display: block;
+    }
+</style>
+{% endblock %} {% block body_tag %}
+<body class="bst-body{% if is_landing %} bst-body--landing{% endif %}">
+    {% endblock %} {% block content %} {# ── Mobile top bar ─────────────────────────────────────── #}
+    <nav class="bst-mobile-bar" role="navigation" aria-label="mobile navigation">
+        <div class="bst-mobile-bar__inner">
+            <button class="bst-hamburger" id="bst-sidebar-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <a class="bst-mobile-bar__brand" href="{{ pathto(master_doc) }}">
+                {%- if theme_logo %}
+                <img
+                    src="{{ pathto('_static/' + theme_logo, 1) }}"
+                    alt="{{ theme_logo_alt }}"
+                    class="bst-mobile-bar__logo"
+                />
+                {%- endif %}
+                <span>{{ theme_logo_alt or project }}</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="bst-wrapper">
+        {# ── Sidebar ────────────────────────────────────────── #}
+        <aside class="bst-sidebar" id="bst-sidebar" role="navigation" aria-label="main navigation">
+            <div class="bst-sidebar__scroll">
+                <div class="bst-sidebar__brand">
+                    <a href="{{ pathto(master_doc) }}" class="bst-sidebar__brand-link">
+                        {%- if theme_logo %}
+                        <img
+                            src="{{ pathto('_static/' + theme_logo, 1) }}"
+                            alt="{{ theme_logo_alt }}"
+                            class="bst-sidebar__logo"
+                        />
+                        {%- else %}
+                        <svg
+                            class="bst-sidebar__logo-icon"
+                            width="28"
+                            height="28"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                        {%- endif %}
+                        <span class="bst-sidebar__title">{{ project }}</span>
+                    </a>
+                    {%- if version %}
+                    <span class="bst-sidebar__version">v{{ version }}</span>
+                    {%- endif %}
+                </div>
+                <div class="bst-sidebar__search">
+                    <form action="{{ pathto('search') }}" method="get" autocomplete="off">
+                        <div class="bst-search-field">
+                            <svg
+                                class="bst-search-field__icon"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                width="16"
+                                height="16"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                    clip-rule="evenodd"
+                                />
+                            </svg>
+                            <input
+                                type="text"
+                                name="q"
+                                placeholder="Search docs…"
+                                class="bst-search-field__input"
+                                aria-label="Search documentation"
+                            />
+                        </div>
+                    </form>
+                </div>
+                <nav class="bst-sidebar__nav" aria-label="Table of contents">
+                    {{ toctree(maxdepth=theme_navigation_depth|int, collapse=theme_collapse_navigation|tobool,
+                    includehidden=True, titles_only=False) }}
+                </nav>
+            </div>
+        </aside>
+
+        {# ── Main content area ──────────────────────────────── #}
+        <main class="bst-main" role="main">
+            {# ═══ SINGLE STICKY HEADER: breadcrumbs left, controls right ═══ #}
+            <header class="bst-header" id="bst-header">
+                <div class="bst-header__left">
+                    {%- if theme_show_breadcrumbs|tobool %}
+                    <nav class="bst-breadcrumbs" aria-label="Breadcrumb">
+                        <ul class="bst-breadcrumbs__list">
+                            <li><a href="{{ pathto(master_doc) }}">Home</a></li>
+                            {%- for parent in parents %}
+                            <li><a href="{{ parent.link }}">{{ parent.title }}</a></li>
+                            {%- endfor %}
+                            <li class="is-active" aria-current="page">{{ title }}</li>
+                        </ul>
+                    </nav>
+                    {%- endif %}
+                </div>
+                <div class="bst-header__right">
+                    <button
+                        class="bst-theme-toggle"
+                        id="bst-theme-toggle"
+                        aria-label="Toggle colour scheme"
+                        title="Colour scheme"
+                    >
+                        <svg
+                            class="bst-theme-icon bst-theme-icon--light"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="12" r="5" />
+                            <line x1="12" y1="1" x2="12" y2="3" />
+                            <line x1="12" y1="21" x2="12" y2="23" />
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                            <line x1="1" y1="12" x2="3" y2="12" />
+                            <line x1="21" y1="12" x2="23" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                        </svg>
+                        <svg
+                            class="bst-theme-icon bst-theme-icon--dark"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                        </svg>
+                        <svg
+                            class="bst-theme-icon bst-theme-icon--system"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                            <line x1="8" y1="21" x2="16" y2="21" />
+                            <line x1="12" y1="17" x2="12" y2="21" />
+                        </svg>
+                    </button>
+                    {%- if theme_repo_url %}
+                    <a href="{{ theme_repo_url }}" class="bst-header__repo" target="_blank" rel="noopener noreferrer">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path
+                                fill-rule="evenodd"
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                            />
+                        </svg>
+                        {{ theme_repo_name }}
+                    </a>
+                    {%- endif %}
+                </div>
+            </header>
+
+            {# ═══ PAGE BODY ═══ #}
+                <article class="bst-article{% if is_landing %} bst-article--landing{% endif %}">
+                  <div class="bst-article__content{% if is_landing %} bst-article__content--landing{% endif %}">
+
+                    {%- if is_landing %}
+
+                    {%- set first_pos = body.find('<section') -%}
+                    {%- set second_pos = body.find('<section', first_pos + 1) if first_pos >= 0 else -1 -%}
+
+                    {%- if second_pos > 0 -%}
+                      {%- set landing_intro = body[:second_pos] -%}
+                      {%- set landing_content = body[second_pos:] -%}
+                    {%- else -%}
+                      {%- set landing_intro = body -%}
+                      {%- set landing_content = '' -%}
+                    {%- endif -%}
+
+                    {%- if theme_logo -%}
+                        {%- set logo_img = '<img src="' ~ pathto('_static/' + theme_logo, 1) ~ '" alt="' ~ theme_logo_alt ~ '" class="bst-landing-hero__logo">' -%}
+                        {{ landing_intro|replace('<h1', logo_img ~ '<h1', 1) }}
+                    {%- else -%}
+                        {{ landing_intro }}
+                    {%- endif %}
+
+                    {%- if landing_page is defined and landing_page.menu is defined %}
+                    <div class="bst-landing-cards">
+                      {%- for card in landing_page.menu %}
+                      <a class="bst-landing-card" href="{{ pathto(card.url) }}">
+                        {%- if card.icon is defined and card.icon %}
+                        <svg class="bst-landing-card__icon" width="28" height="28"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="{{ card.icon }}"/>
+                        </svg>
+                        {%- endif %}
+                        <strong class="bst-landing-card__title">{{ card.title }}</strong>
+                        {%- if card.description is defined and card.description %}
+                        <span class="bst-landing-card__desc">{{ card.description }}</span>
+                        {%- endif %}
+                      </a>
+                      {%- endfor %}
+                    </div>
+                    {%- endif %}
+
+                    {{ landing_content }}
+
+                    {%- else %}
+                    {% block body %}{% endblock %}
+                    {%- endif %}
+
+                  </div>
+                </article>
+
+            {# ═══ ON-PAGE TOC ═══ #} {%- if display_toc %}
+            <button
+                class="bst-toc-toggle"
+                id="bst-toc-toggle"
+                aria-label="Toggle page outline"
+                aria-expanded="true"
+                title="On this page"
+            >
+                <svg
+                    class="bst-toc-toggle__icon bst-toc-toggle__icon--list"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <line x1="8" y1="6" x2="21" y2="6" />
+                    <line x1="8" y1="12" x2="21" y2="12" />
+                    <line x1="8" y1="18" x2="21" y2="18" />
+                    <line x1="3" y1="6" x2="3.01" y2="6" />
+                    <line x1="3" y1="12" x2="3.01" y2="12" />
+                    <line x1="3" y1="18" x2="3.01" y2="18" />
+                </svg>
+                <svg
+                    class="bst-toc-toggle__icon bst-toc-toggle__icon--close"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+            <aside class="bst-page-toc" id="bst-page-toc" aria-label="On this page">
+                <p class="bst-page-toc__heading">On this page</p>
+                <div class="bst-page-toc__search">
+                    <input
+                        type="text"
+                        class="bst-page-toc__filter"
+                        id="bst-toc-filter"
+                        placeholder="Filter…"
+                        aria-label="Filter page sections"
+                        autocomplete="off"
+                    />
+                </div>
+                {{ toc }}
+            </aside>
+            {%- endif %} {# ═══ PREV / NEXT ═══ #}
+            <nav class="bst-pagination" aria-label="Page navigation">
+                {%- if prev %}
+                <a class="bst-pagination__prev" href="{{ prev.link }}">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                    <span class="bst-pagination__text">
+                        <span class="bst-pagination__label">Previous</span>
+                        <span class="bst-pagination__title">{{ prev.title }}</span>
+                    </span>
+                </a>
+                {%- else %}<span></span>{%- endif %} {%- if next %}
+                <a class="bst-pagination__next" href="{{ next.link }}">
+                    <span class="bst-pagination__text">
+                        <span class="bst-pagination__label">Next</span>
+                        <span class="bst-pagination__title">{{ next.title }}</span>
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 6 15 12 9 18" />
+                    </svg>
+                </a>
+                {%- endif %}
+            </nav>
+
+            {# ═══ FOOTER ═══ #}
+            <footer class="bst-footer">
+                <div class="bst-footer__inner">
+                    {%- if theme_footer_text %}
+                    <p class="bst-footer__text">{{ theme_footer_text }}</p>
+                    {%- endif %} {%- if theme_show_powered_by|tobool %}
+                    <p class="bst-footer__powered">
+                        Powered by
+                        <a href="https://www.sphinx-doc.org/" target="_blank" rel="noopener">Sphinx</a>
+                        &amp;
+                        <a href="https://bulma.io/" target="_blank" rel="noopener">Bulma</a>
+                    </p>
+                    {%- endif %} {%- if show_copyright %}
+                    <p class="bst-footer__copy">&copy; {{ copyright }}</p>
+                    {%- endif %}
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <div class="bst-overlay" id="bst-overlay"></div>
+    <script src="{{ pathto('_static/js/theme.js', 1) }}"></script>
+    {% endblock %}
+</body>

@@ -1,0 +1,168 @@
+// ─────────────────────────────────────────────────────────────
+//  _landing.scss — Corporate landing page
+//  Sidebar hidden, content centred, no TOC/breadcrumbs/pagination.
+//
+//  All selectors scope via .bst-body--landing on <body>.
+// ─────────────────────────────────────────────────────────────
+@use "variables" as *;
+
+// ── Layout: hide sidebar, centre content ────────────────────
+
+.bst-body--landing {
+  .bst-sidebar {
+    transform: translateX(-100%);
+    box-shadow: none;
+    &.is-open { transform: translateX(0); box-shadow: var(--bst-shadow-lg); }
+  }
+
+  .bst-main {
+    margin-left: 0 !important;
+  }
+
+  .bst-mobile-bar { display: flex; }
+
+  .bst-breadcrumbs { display: none !important; }
+  .bst-page-toc { display: none !important; }
+  .bst-toc-toggle { display: none !important; }
+}
+
+// ── Article: centred with max-width ─────────────────────────
+
+.bst-article--landing {
+  display: flex;
+  justify-content: center;
+}
+
+.bst-article__content--landing {
+  max-width: 64rem;
+  width: 100%;
+  padding: 0 $gutter;
+  padding-bottom: 4rem;
+
+  // ── Logo floats left INSIDE the section, beside h1 ────
+  .bst-landing-hero__logo {
+    float: left;
+    width: 10rem;
+    height: auto;
+    margin: 0 2.5rem 1.5rem 0;
+    object-fit: contain;
+  }
+
+  // First section flows beside logo
+  > section:first-child,
+  > .section:first-child {
+    overflow: visible;
+  }
+
+  // ── Title — left-aligned, flows beside logo ───────────
+  > section > h1:first-child,
+  > .section > h1:first-child,
+  > h1:first-child {
+    font-size: 2.5rem;
+    font-weight: $weight-bold;
+    text-align: left;
+    margin-bottom: 0.3em;
+    margin-top: 0.5em;
+    letter-spacing: -0.02em;
+    background: var(--bst-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  // ── Subtitle — left-aligned, flows beside logo ────────
+  > section > h1:first-child + p,
+  > .section > h1:first-child + p,
+  > h1:first-child + p {
+    font-size: 1.15rem;
+    text-align: left;
+    color: var(--bst-text-light);
+    margin: 0 0 1.5em;
+    line-height: 1.6;
+  }
+
+  // ── Cards clear the logo float ────────────────────────
+  .bst-landing-cards {
+    clear: both;
+  }
+
+  // toctree as card grid
+  .toctree-wrapper {
+    ul {
+      list-style: none !important; padding: 0;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: 1rem; margin: 1.5em 0;
+    }
+    li { margin: 0; position: static; padding-left: 0; &::before { content: none !important; display: none !important; } }
+    a {
+      display: block; padding: 1.25em;
+      background: var(--bst-bg-raised); border: 1px solid var(--bst-border);
+      border-radius: $radius-lg; text-decoration: none;
+      font-weight: $weight-semi; color: var(--bst-text-strong);
+      transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+      &:hover { border-color: var(--bst-accent); box-shadow: var(--bst-shadow-md); transform: translateY(-2px); text-decoration: none; }
+    }
+  }
+
+  // Section headings — centred with accent underline
+  > section > h2, > .section > h2 {
+    text-align: center; border-top: none; padding-top: 0; margin-top: 3em;
+    &::after {
+      content: ""; display: block; width: 3rem; height: 2px;
+      background: var(--bst-accent); margin: 0.5em auto 0; border-radius: 1px;
+    }
+  }
+
+  .bst-marquee {
+    max-width: 64rem;
+    margin: 4rem auto;
+    overflow: hidden;          // override the section's overflow: visible
+    }
+}
+
+// ── Landing card grid (Jinja-rendered from conf.py) ─────────
+
+.bst-landing-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 1.5em 0 2.5em;
+}
+
+.bst-landing-card {
+  display: flex; flex-direction: column; gap: 0.4em;
+  padding: 1.4em 1.3em;
+  background: var(--bst-bg-raised); border: 1px solid var(--bst-border);
+  border-radius: $radius-lg; text-decoration: none; color: var(--bst-text);
+  transition: border-color $transition-fast, box-shadow $transition-fast, transform $transition-fast;
+  &:hover { border-color: var(--bst-accent); box-shadow: var(--bst-shadow-md); transform: translateY(-2px); text-decoration: none; color: var(--bst-text); }
+  &::before { content: none !important; display: none !important; }
+}
+
+.bst-landing-card__icon { color: var(--bst-accent); margin-bottom: 0.2em; flex-shrink: 0; }
+.bst-landing-card__title { font-family: $family-heading; font-size: 1.1rem; font-weight: $weight-bold; color: var(--bst-text-strong); }
+.bst-landing-card__desc { font-size: $size-small; color: var(--bst-text-light); line-height: 1.45; }
+
+// ── Responsive ──────────────────────────────────────────────
+
+@media (max-width: $bp-mobile) {
+  .bst-article__content--landing {
+    padding: 0 $gutter-sm;
+
+    .bst-landing-hero__logo {
+      float: none;
+      display: block;
+      margin: 1rem auto;
+      width: 8rem;
+    }
+
+    > section > h1:first-child, > .section > h1:first-child, > h1:first-child {
+      font-size: 1.8rem;
+      text-align: center;
+    }
+    > section > h1:first-child + p, > .section > h1:first-child + p {
+      font-size: 1.05rem;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+[theme]
+inherit = "basic"
+stylesheets = [
+    "css/theme.css",
+]
+sidebars = [
+    "globaltoc.html",
+    "searchbox.html",
+]
+pygments_style = { default = "tango" }
+
+[options]
+# ── Branding ──────────────────────────────────────────
+logo              = ""
+logo_alt          = "Documentation"
+favicon           = ""
+
+# ── Colours (CSS custom property overrides) ───────────
+color_primary     = "#030146"
+color_accent      = "#ff420e"
+color_sidebar_bg  = "#f5f6fa"
+color_sidebar_text = "#2d2d48"
+
+# ── Navigation ────────────────────────────────────────
+navigation_depth  = "4"
+collapse_navigation = "False"
+show_breadcrumbs  = "True"
+
+# ── Footer ────────────────────────────────────────────
+footer_text       = "Built with Sphinx and Manticore Sphinx Theme."
+show_powered_by   = "True"
+
+# ── Content ───────────────────────────────────────────
+content_max_width = "52rem"
+
+# ── External links (header) ──────────────────────────
+repo_url          = ""
+repo_name         = "Repository"
+
+# ── Landing page (pagename, e.g. "index") ────────
+landing_page      = ""
