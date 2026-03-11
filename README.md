@@ -7,7 +7,7 @@ Designed for corporate software documentation, it provides an RTD-style
 layout with a fixed sidebar, on-page table of contents, breadcrumbs,
 prev/next navigation, and a fully responsive mobile experience.
 
-[Live Demonstration](https://manticore-projects.com]
+[Live Demonstration](https://manticore-projects.com)
 
 ## Features
 
