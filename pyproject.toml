@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "manticore-sphinx-theme"
-version = "1.0.0"
+version = "1.0.1"
 description = "A clean, corporate Sphinx theme based on Bulma/SASS — no NPM required."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.9"
 authors = [
-    { name = "Your Organisation" },
+    { name = "manticore-projects Co. Ltd." },
 ]
 keywords = ["sphinx", "theme", "bulma", "documentation", "corporate"]
 classifiers = [
@@ -40,9 +40,10 @@ dev = [
 manticore_sphinx_theme = "manticore_sphinx_theme"
 
 [project.urls]
-Homepage   = "https://github.com/yourorg/manticore-sphinx-theme"
-Repository = "https://github.com/yourorg/manticore-sphinx-theme"
-Issues     = "https://github.com/yourorg/manticore-sphinx-theme/issues"
+Homepage       = "https://github.com/manticore-projects/manticore-sphinx-theme"
+Documentation  = "https://manticore-projects.github.io/manticore-sphinx-theme/"
+Repository     = "https://github.com/manticore-projects/manticore-sphinx-theme"
+Issues         = "https://github.com/manticore-projects/manticore-sphinx-theme/issues"
 
 [tool.setuptools.packages.find]
 include = ["manticore_sphinx_theme*"]
