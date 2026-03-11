@@ -26,7 +26,7 @@ jobs:
       - run: pip install sphinx
 
       - name: Compile SASS
-        run: python build.py css
+        run: python make.py css
 
       - name: Build docs
         run: sphinx-build -b html theme-docs/ _build/html
