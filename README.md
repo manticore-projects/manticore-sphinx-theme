@@ -1,5 +1,13 @@
 # Manticore Sphinx Theme <img width="22%" alt="Dark Mode" align="right" src="https://github.com/user-attachments/assets/42ca8c17-7e5a-4b0a-8141-15ee382a6825" /> <img width="22%"  alt="Bright Mode" align="right" src="https://github.com/user-attachments/assets/62654cf4-6276-40f2-a875-d1c3ebb91e14" />
 
+[![PyPI version](https://img.shields.io/pypi/v/manticore-sphinx-theme?color=%23030146)](https://pypi.org/project/manticore-sphinx-theme/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/manticore-sphinx-theme)](https://pypi.org/project/manticore-sphinx-theme/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/manticore-sphinx-theme)](https://pypi.org/project/manticore-sphinx-theme/)
+[![Sphinx](https://img.shields.io/badge/Sphinx-7%2B-blue?logo=sphinx)](https://www.sphinx-doc.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/manticore-projects/manticore-sphinx-theme/docs.yml?label=docs)](https://github.com/manticore-projects/manticore-sphinx-theme/actions)
+[![Live Demo](https://img.shields.io/badge/demo-live-ff420e)](https://manticore-projects.github.io/manticore-sphinx-theme/)
+
 A clean, elegant documentation theme for **Sphinx 7+** built on
 **Bulma CSS / SASS** — with **zero NPM or Node.js dependencies**. 
 
