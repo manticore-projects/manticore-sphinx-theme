@@ -1,13 +1,13 @@
 # Manticore Sphinx Theme
 
 A clean, elegant documentation theme for **Sphinx 7+** built on
-**Bulma CSS / SASS** — with **zero NPM or Node.js dependencies**.
+**Bulma CSS / SASS** — with **zero NPM or Node.js dependencies**. <img width="15%" alt="Dark Mode" src="https://github.com/user-attachments/assets/42ca8c17-7e5a-4b0a-8141-15ee382a6825" /> <img width="15%"  alt="Bright Mode" src="https://github.com/user-attachments/assets/62654cf4-6276-40f2-a875-d1c3ebb91e14" />
 
 Designed for corporate software documentation, it provides an RTD-style
 layout with a fixed sidebar, on-page table of contents, breadcrumbs,
 prev/next navigation, and a fully responsive mobile experience.
 
-<img width="25%" alt="image" src="https://github.com/user-attachments/assets/42ca8c17-7e5a-4b0a-8141-15ee382a6825" /> <img width="25%" height="819" alt="image" src="https://github.com/user-attachments/assets/62654cf4-6276-40f2-a875-d1c3ebb91e14" />
+
 
 ---
 
