@@ -260,14 +260,13 @@ set is_landing = (theme_landing_page and pagename == theme_landing_page) -%} {% 
                     <div class="bst-landing-cards">
                       {%- for card in landing_page.menu %}
                       <a class="bst-landing-card" href="{{ pathto(card.url) }}">
-                        {%- if card.icon is defined and card.icon %}
+                        <strong class="bst-landing-card__title">{%- if card.icon is defined and card.icon %}
                         <svg class="bst-landing-card__icon" width="28" height="28"
                              viewBox="0 0 24 24" fill="none" stroke="currentColor"
                              stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                           <path d="{{ card.icon }}"/>
                         </svg>
-                        {%- endif %}
-                        <strong class="bst-landing-card__title">{{ card.title }}</strong>
+                        {%- endif %} {{ card.title }}</strong>
                         {%- if card.description is defined and card.description %}
                         <span class="bst-landing-card__desc">{{ card.description }}</span>
                         {%- endif %}

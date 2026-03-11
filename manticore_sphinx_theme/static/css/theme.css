@@ -2080,17 +2080,20 @@ a.image-reference:hover img {
   display: none !important;
 }
 
-.bst-landing-card__icon {
-  color: var(--bst-accent);
-  margin-bottom: 0.2em;
-  flex-shrink: 0;
-}
-
 .bst-landing-card__title {
   font-family: "Roboto", "Segoe UI", system-ui, -apple-system, sans-serif;
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--bst-text-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.bst-landing-card__icon {
+  color: var(--bst-accent);
+  flex-shrink: 0;
+  margin: 0;
 }
 
 .bst-landing-card__desc {
