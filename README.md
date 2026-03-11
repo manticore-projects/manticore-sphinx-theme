@@ -7,8 +7,7 @@ Designed for corporate software documentation, it provides an RTD-style
 layout with a fixed sidebar, on-page table of contents, breadcrumbs,
 prev/next navigation, and a fully responsive mobile experience.
 
-<img width="50%" alt="image" src="https://github.com/user-attachments/assets/42ca8c17-7e5a-4b0a-8141-15ee382a6825" />
-<img width="50%" height="819" alt="image" src="https://github.com/user-attachments/assets/62654cf4-6276-40f2-a875-d1c3ebb91e14" />
+<img width="25%" alt="image" src="https://github.com/user-attachments/assets/42ca8c17-7e5a-4b0a-8141-15ee382a6825" /> <img width="25%" height="819" alt="image" src="https://github.com/user-attachments/assets/62654cf4-6276-40f2-a875-d1c3ebb91e14" />
 
 ---
 
